@@ -2,7 +2,7 @@ Walmart Sales Data Analysis
 
 📌 Project Overview
 
-This project is an end-to-end data analysis solution designed to extract critical business insights from Walmart sales data. We utilize Python for data processing and analysis, SQL for advanced querying, and structured problem-solving techniques to answer key business questions.
+This project is an end-to-end data analysis solution designed to extract critical business insights from Walmart sales data. Utilized Python for data processing and analysis, SQL for advanced querying, and structured problem-solving techniques to answer key business questions.
 
 📂 Dataset Description
 
@@ -24,9 +24,9 @@ total: Total sales amount per transaction
 
 Requirements
 Python 3.8+
-SQL Databases: MySQL, PostgreSQL
+SQL Databases: MySQL
 Python Libraries:
-pandas, numpy, sqlalchemy, mysql-connector-python, psycopg2
+pandas, numpy, sqlalchemy, mysql-connector-python
 Kaggle API Key (for data downloading)
 
 
