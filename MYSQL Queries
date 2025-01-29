@@ -1,6 +1,6 @@
 Business Problems and SQL Queries
 1. Which store branch generates the highest revenue?
-```sql
+```sq
 SELECT Branch, SUM(CAST(REPLACE(unit_price, '$', '') AS DECIMAL) * quantity) AS total_revenue
 FROM walmart_sales
 GROUP BY Branch
