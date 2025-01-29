@@ -1,9 +1,75 @@
-Business Problems and SQL Queries
+Business Problems and SQL Queries:-
+
 1. Which store branch generates the highest revenue?
-```sq
+Query:
 SELECT Branch, SUM(CAST(REPLACE(unit_price, '$', '') AS DECIMAL) * quantity) AS total_revenue
-FROM walmart_sales
+FROM walmart
 GROUP BY Branch
 ORDER BY total_revenue DESC
 LIMIT 1;
-```
+
+2. What is the most popular product category by total sales?
+Query:
+SELECT category, SUM(quantity) AS total_units_sold
+FROM walmart
+GROUP BY category
+ORDER BY total_units_sold DESC
+LIMIT 1;
+
+3. Which payment method is most frequently used?
+Query:
+SELECT payment_method, COUNT(*) AS total_transactions
+FROM walmart
+GROUP BY payment_method
+ORDER BY total_transactions DESC;
+
+4. What is the average customer rating per branch?
+Query:
+SELECT Branch, ROUND(AVG(rating), 2) AS avg_rating
+FROM walmart_sales
+GROUP BY Branch
+ORDER BY avg_rating DESC;
+
+5.Which payment method is most frequently used, and how does it contribute to overall sales?
+Query:
+SELECT payment_method, 
+       COUNT(*) AS transaction_count, 
+       SUM(total) AS total_sales
+FROM walmart
+GROUP BY payment_method
+ORDER BY transaction_count DESC;
+
+
+6. Which day of the week has the highest number of transactions?
+Query:
+SELECT DAYNAME(STR_TO_DATE(date, '%d/%m/%y')) AS day_of_week, COUNT(*) AS transactions
+FROM walmart_sales
+GROUP BY day_of_week
+ORDER BY transactions DESC;
+
+7.How do sales fluctuate across different months? Identify peak and low sales periods.
+Query:
+SELECT MONTH(STR_TO_DATE(date, '%d/%m/%Y')) AS month, 
+       SUM(total) AS total_sales
+FROM walmart_sales
+GROUP BY month
+ORDER BY total_sales DESC;
+
+
+8. Categorize Sales into Morning, Afternoon, and Evening Shifts
+Morning (06:00 - 11:59)
+Afternoon (12:00 - 17:59)
+Evening (18:00 - 23:59)
+Query:
+SELECT 
+    CASE 
+        WHEN HOUR(STR_TO_DATE(time, '%H:%i:%s')) BETWEEN 6 AND 11 THEN 'Morning'
+        WHEN HOUR(STR_TO_DATE(time, '%H:%i:%s')) BETWEEN 12 AND 17 THEN 'Afternoon'
+        WHEN HOUR(STR_TO_DATE(time, '%H:%i:%s')) BETWEEN 18 AND 23 THEN 'Evening'
+        ELSE 'Night'
+    END AS shift,
+    SUM(total) AS total_sales
+FROM walmart_sales
+GROUP BY shift
+ORDER BY total_sales DESC;
+
